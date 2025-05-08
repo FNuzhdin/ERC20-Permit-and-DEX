@@ -1,0 +1,27 @@
+# Dependencies
+/node_modules
+.env
+.env.local
+
+# Test scripts 
+scripts/deployedAddressTest.json
+scripts/deployTest.ts
+scripts/verifyTest.ts 
+
+# Test contracts 
+contracts/Test.sol 
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+/ignition
