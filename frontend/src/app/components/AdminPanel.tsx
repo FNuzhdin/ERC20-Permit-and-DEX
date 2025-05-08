@@ -28,18 +28,18 @@ const AdminPanel: React.FC<AdminPanelProps> = ({connection, setTxHash, setErrorT
         }
 
         try {
-            console.log("Try to send tx");
-            console.log(connection);
+            console.log("Attempt to send transaction");
+            console.log("Connection:", connection);
 
             const tx = await connection?.exch?.setPriceDivisor(BigInt(divisor));
             
-            console.log("sended", tx);
+            console.log("Tx sent", tx);
 
             await tx?.wait();
             setTxHash(tx?.hash);
           
-            console.log("succes");
-            console.log(await connection?.exch?.divisor());
+            console.log("Transaction sent successfully");
+            console.log("Actual divisor:", await connection?.exch?.divisor());
         } catch (error: any) {
             if (error.reason) {
                 console.error(error.reason);
@@ -58,22 +58,21 @@ const AdminPanel: React.FC<AdminPanelProps> = ({connection, setTxHash, setErrorT
         }
 
         const _ethValue = BigInt(Number(value.replaceAll(",", ".")) * 10 ** 18);
-        console.log(_ethValue, typeof(_ethValue));
         try {
-            console.log("Try to send tx");
-            console.log(connection);
+            console.log("Attempt to send transaction");
+            console.log("Connetion:", connection);
 
             const tx = await connection?.exch?.topUp({ value: _ethValue });
             
-            console.log("sended", tx);
+            console.log("Tx sent", tx);
 
             await tx?.wait();
             setTxHash(tx?.hash);
 
             const exchAddr = await connection?.exch?.getAddress();
           
-            console.log("succes");
-            console.log(await connection?.provider?.getBalance(exchAddr!, await connection?.provider?.getBlockNumber()));
+            console.log("Transaction sent successfully");
+            console.log("Current exchange ETH balance:", await connection?.provider?.getBalance(exchAddr!, await connection?.provider?.getBlockNumber()));
         } catch (error: any) {
             if (error.reason) {
                 console.error(error.reason);
@@ -87,7 +86,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({connection, setTxHash, setErrorT
 
     const handleClickWithdraw = async() => {
 
-        console.log("withdraw starts");
+        console.log("Withdraw started");
 
         try {
             const tx = await connection?.exch?.withdraw();
@@ -101,7 +100,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({connection, setTxHash, setErrorT
             }
         } 
 
-        console.log("withdraw is succes");
+        console.log("Withdraw successfully");
     }
 
     return (

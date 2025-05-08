@@ -74,7 +74,7 @@ export default function Home() {
                     return _resetState();
                 }
 
-                console.log("new initialize");
+                console.log("New initialization");
                 _resetState();
                 await _initialize(newAccount);
             }
@@ -83,9 +83,9 @@ export default function Home() {
         window.ethereum.on(
             "chainChanged",
             async([_newNetworkId]: string) => {
-                console.log("chain changed");
+                console.log("Chain changed");
                 if (!(await _checkNetwork(_newNetworkId))) {
-                    console.log("reset state");
+                    console.log("Reset");
                     return _resetState();
                 }
             }
@@ -93,7 +93,7 @@ export default function Home() {
     }
 
     const _resetState = () => {
-        console.log("resetState");
+        console.log("Reset");
         setCurrentConnection({
             provider: undefined,
             exch: undefined,
@@ -107,7 +107,7 @@ export default function Home() {
     }
 
     const _checkNetwork = async(newNetworkId?: string): Promise<boolean> => {
-        console.log("checkNetwork");
+        console.log("Check network");
         const chosenChainId = 
             newNetworkId || await window.ethereum.request({
                 method: "eth_chainId",
@@ -117,17 +117,17 @@ export default function Home() {
             chosenChainId === SEPOLIA_CHAINID ||
             chosenChainId === HARDHAT_CHAINID
         ) {
-            console.log("network is true");
+            console.log("Network is true");
             return true;
         } else {
-            console.log("network is false");
+            console.log("Network is false");
             setErrorNetwork("Only hardhat or sepolia networks");
             return false; 
         }
     }
 
     const _initialize = async(selectedAccount: string) => {
-        console.log("initialize starts");
+        console.log("Initialization started");
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner(selectedAccount);
 
@@ -141,7 +141,7 @@ export default function Home() {
             signer,
             isOwner
         });
-        console.log("initialize is succes");
+        console.log("Initialization successful");
     }
 
     const _checkOwner = async(signer: ethers.JsonRpcSigner): Promise<boolean> => {
