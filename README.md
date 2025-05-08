@@ -62,9 +62,11 @@ npx hardhat run scripts/deploy.ts --network sepolia  # Deploy
 ```
 ### 2. Frontend
 
+```dash
 cd frontend
 npm install
 npm run dev # http://localhost:3000
+```
 
 ```
 
